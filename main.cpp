@@ -157,6 +157,8 @@ int main(int argc, char** argv)
 	int endMenuChoice = 0;
 	int maxEndMenuChoices = 2;
 
+	std::cout << "Atacks:" << std::endl;
+
 	// -------------------------------------------------------------
 	Attack sword("Sword", 3, 450);
 	Attack axe("Axe", 10, 350);
@@ -180,14 +182,10 @@ int main(int argc, char** argv)
 	Agent * opponent;
 	Agent * player;
 
+	std::cout << "Charactzers:" << std::endl;
 	Agent character1("", 70 + rand() % 30);
 	Agent character2("", 70 + rand() % 30);
 
-	// For debugging purpose only :
-//	player = &character2;
-//	opponent = &character2;
-//	playerSprite = &character1Sprite;
-//	opponentSprite = &character1Sprite;
 
 	// ----------------------------------------
 	std::vector<Agent> characters;
@@ -198,6 +196,7 @@ int main(int argc, char** argv)
 	float cursorPosX=0.0, cursorPosY=0.0;
 	cursorSprite.setPosition(cursorPosX, cursorPosY);
 	sf::Clock clock;
+	std::cout << "Loop:" << std::endl;
 	while (App.isOpen())
 	{
 		// Process events
@@ -369,6 +368,7 @@ int main(int argc, char** argv)
 			break;
 			case 2:
 				bgColor = sf::Color(0, 192, 255);
+			break;
 			default:
 			break;
 		}
@@ -386,6 +386,7 @@ int main(int argc, char** argv)
 		char1Name.setFont(fontTitle);
 		char1Name.setString(character1.getName());
 		char1MaxLife.setFont(fontTitle);
+	//	std::cout << "char1 life and shield" << std::endl;
 		char1MaxLife.setString("Life : " + std::to_string(character1.getMaxLife()));
 		char1Shield.setString("Shield : " + std::to_string(character1.getShield()));
 		char1Shield.setFont(fontTitle);
@@ -393,10 +394,12 @@ int main(int argc, char** argv)
 		char2Name.setFont(fontTitle);
 		char2Name.setString(character2.getName());
 		char2MaxLife.setFont(fontTitle);
+//		std::cout << "char2 life and shield" << std::endl;
 		char2MaxLife.setString("Life : " + std::to_string(character2.getMaxLife()));
 		char2Shield.setString("Shield : " + std::to_string(character2.getShield()));
 		char2Shield.setFont(fontTitle);
 
+	//	std::cout << "char1 name position" << std::endl;
 		char1Name.setPosition(WINDOW_WIDTH * 0.3 / 3, WINDOW_HEIGHT * 0.8 / 4);
 		char1Name.setCharacterSize(24);
 		char1MaxLife.setPosition(WINDOW_WIDTH * 0.3 / 3, WINDOW_HEIGHT * 1.7 / 4);
@@ -404,6 +407,8 @@ int main(int argc, char** argv)
 		char1Shield.setPosition(WINDOW_WIDTH * 0.3 / 3, WINDOW_HEIGHT * 2 / 4);
 		char1Shield.setCharacterSize(24);
 			
+	//	std::cout << "char1 name position" << std::endl;
+		char1Name.setPosition(WINDOW_WIDTH * 0.3 / 3, WINDOW_HEIGHT * 0.8 / 4);
 		char2Name.setPosition(WINDOW_WIDTH * 2.3 / 3, WINDOW_HEIGHT * 0.8 / 4);
 		char2Name.setCharacterSize(24);
 		char2MaxLife.setPosition(WINDOW_WIDTH * 2.3 / 3, WINDOW_HEIGHT * 1.7 / 4);
@@ -417,27 +422,57 @@ int main(int argc, char** argv)
 
 		float playerRatio = 0.0;
 		float opponentRatio = 0.0;
-		if( player && (player->getMaxLife() != 0) ){ playerRatio = float(player->getLife()) / player->getMaxLife(); }
-		if( opponent && (opponent->getMaxLife() !=0) ){ opponentRatio = float(opponent->getLife()) / opponent->getMaxLife(); }
+		//std::cout << "Boudaouh" << std::endl;
+		//char1Name.setPosition(WINDOW_WIDTH * 0.3 / 3, WINDOW_HEIGHT * 0.8 / 4);
+		//std::cout << "Boudaouh" << std::endl;
+		
 		sf::Text playerLifeDisplay;
 		playerLifeDisplay.setFont(fontTitle);
 		playerLifeDisplay.setString("0");
-		if( player ){ playerLifeDisplay.setString(std::to_string(player->getLife())); }
+		playerLifeDisplay.setColor(sf::Color::Black);
 		playerLifeDisplay.setPosition(10, 10);
 
 		sf::Text opponentLifeDisplay;
 		opponentLifeDisplay.setString("0");
+		opponentLifeDisplay.setColor(sf::Color::Black);
 		opponentLifeDisplay.setFont(fontTitle);
-		if( opponent ){ opponentLifeDisplay.setString(std::to_string(opponent->getLife())); }
 		opponentLifeDisplay.setPosition(WINDOW_WIDTH-40, 10);
+		switch(gameState)
+		{
+			case 2:
+				if( player != NULL ){ if(player->getMaxLife() != 0){ playerRatio = float(player->getLife()) / player->getMaxLife(); } }
+				if( player ){ playerLifeDisplay.setString(std::to_string(player->getLife())); }
+				if( opponent != NULL){  if(opponent->getMaxLife() !=0){ opponentRatio = float(opponent->getLife()) / opponent->getMaxLife(); } }
+				if( opponent ){ opponentLifeDisplay.setString(std::to_string(opponent->getLife())); }
+			break;
+			default:
+			break;
+		}
 				
 		// Life slot
-	//	sf::CircleShape life;
-	//	sf::CircleShape shape(50);
-	//	life.setFillColor(sf::Color((1.0 - playerRatio) * 255, playerRatio * 255, 0));
-		//, 5, sf::Color(255, 255, 255))
 		//10, 10, 50, sf::Color((1.0 - playerRatio) * 255, playerRatio * 255, 0), 5, sf::Color(255, 255, 255))
+		sf::CircleShape lifeLeft(50);
+		lifeLeft.setFillColor(sf::Color((1.0 - playerRatio) * 255, playerRatio * 255, 0));
+		lifeLeft.setOutlineColor(sf::Color(128, 0, 0));
+		lifeLeft.setOutlineThickness(5);
+		//, 5, sf::Color(255, 255, 255));
+		lifeLeft.setPosition(-25, -25);
 
+		sf::CircleShape lifeRight(50);
+		lifeRight.setFillColor(sf::Color((1.0 - opponentRatio) * 255, opponentRatio * 255, 0));
+		lifeRight.setOutlineColor(sf::Color(128, 0, 0));
+		lifeRight.setOutlineThickness(5);
+		//, 5, sf::Color(255, 255, 255));
+		lifeRight.setPosition(WINDOW_WIDTH-70, -25);
+		//lifeRight.setPosition(WINDOW_WIDTH-25, -25);
+
+		// BG :
+		sf::RectangleShape bgRect(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+		bgRect.setFillColor(sf::Color(192, 128, 64));
+		bgRect.setOutlineColor(sf::Color(128,128,0));
+		bgRect.setPosition(0, WINDOW_HEIGHT * 0.8/2);
+		// Menu : 
+	//	App.draw(sf::Shape::Rectangle(0, WINDOW_HEIGHT * 4.2/5, WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color(192, 0, 0), 5, sf::Color(64, 0, 0))); //, sf::Color::Black, 0, sf::Color::Red);
 //		std::cout << playerRatio << " " << opponentRatio << std::endl;
 		switch(gameState)
 		{
@@ -492,16 +527,15 @@ int main(int argc, char** argv)
 				}
 				else{ cumulativeTime += elapsedTime.asSeconds(); }
 					
-		//		App.draw(life); //, sf::Color::Black, 0, sf::Color::Red);
-				App.draw(playerLifeDisplay);
 				
-			//	App.draw(sf::Shape::Circle(WINDOW_WIDTH-10, 10, 50, sf::Color((1.0 - opponentRatio) * 255, opponentRatio * 255, 0), 5, sf::Color(255, 255, 255))); //, sf::Color::Black, 0, sf::Color::Red);
+				App.draw(lifeLeft); //, sf::Color::Black, 0, sf::Color::Red);
+				App.draw(lifeRight); //, sf::Color::Black, 0, sf::Color::Red);
+				App.draw(playerLifeDisplay);
 				App.draw(opponentLifeDisplay);
+				App.draw(bgRect); //, sf::Color::Black, 0, sf::Color::Red);
+			//	App.draw(lifeRight); //, sf::Color::Black, 0, sf::Color::Red);
 			//	
-			//	// BG :
-			//	App.draw(sf::Shape::Rectangle(0, WINDOW_HEIGHT * 0.8/2, WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color(192, 128, 64), 0, sf::Color(128,128,0))); //, sf::Color::Black, 0, sf::Color::Red);
-			//	// Menu : 
-			//	App.draw(sf::Shape::Rectangle(0, WINDOW_HEIGHT * 4.2/5, WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color(192, 0, 0), 5, sf::Color(64, 0, 0))); //, sf::Color::Black, 0, sf::Color::Red);
+				
 				App.draw(*opponentSprite);
 				App.draw(*playerSprite);
 				App.draw(choice1);
