@@ -25,8 +25,8 @@ int main(int argc, char** argv)
 	sf::Sprite character2Sprite;
 	sf::Sprite character3Sprite;
 	sf::Sprite character4Sprite;
-	//if (!character1Texture.loadFromFile("images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
-	if (!character1Texture.loadFromFile("images/movement-grid.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	if (!character1Texture.loadFromFile("images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	//if (!character1Texture.loadFromFile("images/movement-grid.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	//if (!character1Texture.loadFromFile("images/basic-sheet.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	else
 	{
@@ -39,6 +39,11 @@ int main(int argc, char** argv)
 	int animFrameY = 0;
 	int spriteRows = 4;
 	int spriteCols = 4;
+	int animPos = 0;
+ 	float radius = 64.0;
+ 	float offsetX = 128.0;
+ 	float offsetY = 128.0;
+ 	int angleNb = 360.0;
 	
 //	character1Sprite.setTextureRect(sf::IntRect(32, 96, 32, 48));
 //	std::cout << "Texture sprite : " << (character1Sprite.getTexture())->getSize().x << " " <<  (character1Sprite.getTexture())->getSize().y << std::endl;
@@ -90,6 +95,7 @@ int main(int argc, char** argv)
 	sf::Time elapsedTime = clock.getElapsedTime();
 	clock.restart();
 	float cumulativeTime = 0.0;
+	float cumulativeTime2 = 0.0;
 	
 	while (App.isOpen())
 	{
@@ -137,15 +143,31 @@ int main(int argc, char** argv)
 
 		elapsedTime = clock.getElapsedTime();
 		cumulativeTime += elapsedTime.asSeconds();
+		cumulativeTime2 += elapsedTime.asSeconds();
 		clock.restart();
 	//	std::cout << "Cumtime: " << cumulativeTime << std::endl;
-		if (cumulativeTime > 0.5){ animFrameX = (animFrameX+1) % spriteCols;cumulativeTime = 0.0; }
+//		if (cumulativeTime > 0.25){ animPos = (animPos+1) % angleNb; } 
+		if(cumulativeTime > 0.2){ animFrameX = (animFrameX+1) % spriteCols; cumulativeTime = 0.0; }
+		if(cumulativeTime2 > 0.01){ animPos = (animPos+1) % (angleNb); cumulativeTime2 = 0.0; }
+		//if( elapsedTime.asSeconds() ){animPos = (animPos+1) % (30*angleNb);
+		
 	//	character1Sprite.setTextureRect(sf::IntRect(animFrameX*32, animFrameY*48, 32, 48));
 	//	character1Sprite.setTextureRect(sf::IntRect(0, animFrameY*48, 128, 48));
 		character1Sprite.setTextureRect(sf::IntRect(animFrameX*32, 0, 32, 48));
 		character2Sprite.setTextureRect(sf::IntRect(animFrameX*32, 48, 32, 48));
 		character3Sprite.setTextureRect(sf::IntRect(animFrameX*32, 96, 32, 48));
 		character4Sprite.setTextureRect(sf::IntRect(animFrameX*32, 144, 32, 48));
+//		float x = sin(3.14159265/180.0*animPos);
+//		float y = cos(3.14159265/180.0*animPos);
+		float x = radius * sin(3.14159265/180.0*animPos);
+		float y = radius * cos(3.14159265/180.0*animPos);
+		//float x = offsetX + radius * sin(3.14159265/180.0*animPos);
+		//float y = offsetY + radius * cos(3.14159265/180.0*animPos);
+//		std::cout << "Pos: " << x << " " << y << " " << animPos << " " << animPos * 360.0 / angleNb << std::endl;
+		character1Sprite.setPosition(256+x, 128+y);
+		character2Sprite.setPosition(128+x, 128+y);
+		character3Sprite.setPosition(128+x, 256+y);
+		character4Sprite.setPosition(256+x, 256+y);
 //		std::cout << "AnimFrame: " << animFrameX << " " << animFrameY << " et: " << elapsedTime.asSeconds() << std::endl; 
 		//std::cout << "AnimFrame: " << animFrameX << " " << animFrameY << " " << event.key.code << std::endl; 
 		App.clear();
