@@ -9,6 +9,10 @@ SimpleRumble : main.o Agent.o Attack.o utils.o Animator.o
 	g++ *.o -o SimpleRumble2_${VERSION} -L${PATHTOSFML}/lib -lsfml-system -lsfml-graphics -lsfml-network -lsfml-audio -lsfml-window
 	rm *.o
 
+map: testMap.o
+	g++ testMap.o -o testMap_${VERSION} -L${PATHTOSFML}/lib -lsfml-system -lsfml-graphics -lsfml-network -lsfml-audio -lsfml-window
+	rm *.o
+
 anim: testAnim.o
 	g++ testAnim.o -o testAnim_${VERSION} -L${PATHTOSFML}/lib -lsfml-system -lsfml-graphics -lsfml-network -lsfml-audio -lsfml-window
 	rm *.o
