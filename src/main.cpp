@@ -78,13 +78,12 @@ int main(int argc, char** argv)
 	if( !fontNormal.loadFromFile("media/fonts/arial.ttf") ){ std::cout << "Font cannot be loaded !" << std::endl; }
 	//if( !font.loadFromFile("arial.ttf") ){ std::cout << "Font cannot be loaded !" << std::endl; }
 	sf::Text titleText;
-    //std::string titleString = "SIMPLE RUMBLE 2 !"; // + std::string(APP_STATUS) + std::to_string(APP_VERSION);
-	std::string titleString = "SIMPLE RUMBLE 2 ! v" + std::to_string(Simplerumble_VERSION_MAJOR) +  std::to_string(Simplerumble_VERSION_MINOR);
-    std::cout << "SIMPLE RUMBLE 2 ! v" << Simplerumble_VERSION_MAJOR << "." << Simplerumble_VERSION_MINOR << std::endl;
-    titleText.setString(titleString);
+	std::string titleString = "SIMPLE RUMBLE 2 !\n\t\t\t\tv" + std::to_string(Simplerumble_VERSION_MAJOR) + "." +  std::to_string(Simplerumble_VERSION_MINOR);
+	std::cout << "SIMPLE RUMBLE 2 ! v" << Simplerumble_VERSION_MAJOR << "." << Simplerumble_VERSION_MINOR << std::endl;
+	titleText.setString(titleString);
 	titleText.setCharacterSize(36);
-	titleText.setRotation(20);
-	titleText.setPosition(WINDOW_WIDTH * 1.0/5, WINDOW_HEIGHT * 2.5/5);
+	//titleText.setRotation(20);
+	titleText.setPosition(WINDOW_WIDTH * 1.0/5, WINDOW_HEIGHT * 1.5/5);
 	titleText.setFont(fontTitle);
 
 	// ##### MENU Interface #####
