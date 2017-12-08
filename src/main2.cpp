@@ -19,12 +19,9 @@ SIMPLE RUMBLE !
 #include "utils.h"
 #include "SRConfig.h"
 
-//#define APP_VERSION 0.1
-//#define APP_STATUS "b"
-
 #define SPEED 1000
-#define WINDOW_WIDTH 600
-#define WINDOW_HEIGHT 400
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 int main(int argc, char** argv)
 {
@@ -35,8 +32,80 @@ int main(int argc, char** argv)
 	// Create main window
 	// Black screen
 	sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!");
-	
-	sf::Sprite * opponentSprite;
+    App.setFramerateLimit(60);
+	sf::Texture cursorTexture;
+    sf::Sprite cursorSprite;
+	if (!cursorTexture.loadFromFile("media/images/menuSelect2.png")){ std::cout << "Error when loading cursor image" << std::endl; return EXIT_FAILURE; }
+	else{ cursorSprite.setTexture(cursorTexture); }
+
+	cursorSprite.setScale(0.2f, 0.2f);
+    int redval = 0;	
+	// Start game loop
+	float cumulativeTime = 0.0;
+	float cursorPosX=0.0, cursorPosY=0.0;
+	//cursorSprite.setPosition(cursorPosX, cursorPosY);
+	sf::Clock clock;
+	std::cout << "Loop:" << std::endl;
+	while (App.isOpen())
+	{
+		// Process events
+		sf::Event event;
+		sf::Time elapsedTime = clock.getElapsedTime();
+		clock.restart();
+		bool validatedChoice = false;
+		int enemyChoice;
+
+        // Unit Factory:
+        // Factory(bool activated);
+        // Entity factory = Factory(false);
+        // Unit lists
+        // Entity 
+
+		while (App.pollEvent(event))
+		{
+			// Event processing
+			if(event.type == sf::Event::Closed){ App.close(); }
+			if(event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape){ App.close(); }
+				
+				switch(gameState)
+				{
+                    case 0: 
+                        std::cout << "GS0" << std::endl;
+				        if (event.key.code == sf::Keyboard::Add){ redval+= 3; }
+				        if (event.key.code == sf::Keyboard::Subtract){ redval -= 3; }
+				        if (event.key.code == sf::Keyboard::Space){ gameState = 1; }
+                        break;
+                    case 1: 
+                        std::cout << "GS1" << std::endl;
+				        if (event.key.code == sf::Keyboard::Space){ gameState = 2; }
+                        break;
+                    case 2: 
+                        std::cout << "GS2" << std::endl;
+				        if (event.key.code == sf::Keyboard::Space){ gameState = 3; }
+				        // Spawn a unit factory
+                        // if (event.key.code == sf::Keyboard::Space){ gameState = 3; }
+                        break;
+                    case 3: 
+                        std::cout << "GS3" << std::endl;
+				        if (event.key.code == sf::Keyboard::Space){ gameState = 0; }
+				        // Spawn units
+				        // if (event.key.code == sf::Keyboard::Space){ gameState = 0; }
+                        break;
+                    default: 
+                        std::cout << "DS" << std::endl;
+				        if (event.key.code == sf::Keyboard::Space){ gameState = 0; }
+                        break;
+                }
+            }
+        }
+		App.draw(cursorSprite);
+        sf::Color bgColor = sf::Color(0+redval, 0, 0);
+		App.clear(bgColor);
+		App.display();
+    }
+	/*sf::Sprite * opponentSprite;
 	sf::Sprite * playerSprite;
 	
 	sf::Texture character1Texture;
@@ -184,7 +253,7 @@ int main(int argc, char** argv)
 	Agent * opponent;
 	Agent * player;
 
-	std::cout << "Characters:" << std::endl;
+	std::cout << "Charactzers:" << std::endl;
 	Agent character1("", 70 + rand() % 30);
 	Agent character2("", 70 + rand() % 30);
 
@@ -563,7 +632,7 @@ int main(int argc, char** argv)
 
 	// Reseting pointers (not useful ?)
 	player = opponent = 0;
-
+*/
 	return EXIT_SUCCESS;
 }
 

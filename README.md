@@ -7,4 +7,4 @@ Fight survival game
 
 Choose a character, fight your opponent, start again and enjoy!
 
-In C++ w/ SFML 1.6 (binary install with Ubuntu 12.04)
+In C++ w/ SFML 2.+ 
