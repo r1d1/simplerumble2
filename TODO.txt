@@ -1,0 +1,17 @@
+SimpleRumble:
+- Fight animation
+- More attacks
+
+Implement:
+- Inventory
+- Combos
+- Character generation (what was my idea? STR unit like popping ? RPG definition -easy, ain't it?)
+- Collision system / platformer
+- Tree quest system
+
+6 Chapters / Episodes / Game Phase 
+
+- Double dragon-like game
+- Pac-man like
+
+Game with lifelong learning AI Jean-Jacques that learns to play the game and that can be "forked" to generate Jean-Jacques 2, 3 ...
