@@ -70,12 +70,15 @@ int main(int argc, char** argv)
 		bool validatedChoice = false;
 		int enemyChoice;
 		cumulativeTime += elapsedTime.asSeconds(); 
-        std::cout << "Cum time: \033[32m"<< cumulativeTime << ", " << duration << "\033[39m" << std::endl;
+        //std::cout << "Cum time: \033[32m"<< cumulativeTime << ", " << duration << "\033[39m" << std::endl;
+        
         // Unit Factory:
         // Factory(bool activated);
         // Entity factory = Factory(false);
         // Unit lists
         // Entity 
+        float dx = 0.0;
+        float dy = 0.0;
 
 		while (App.pollEvent(event))
 		{
@@ -84,6 +87,10 @@ int main(int argc, char** argv)
 			if(event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape){ App.close(); }
+                if (event.key.code == sf::Keyboard::Up){ dy = -5; }
+                if (event.key.code == sf::Keyboard::Down){ dy = 5; }
+                if (event.key.code == sf::Keyboard::Left){ dx = -5; }
+                if (event.key.code == sf::Keyboard::Right){ dx = 5; }
 				
 				/*switch(gameState)
 				{
@@ -128,6 +135,11 @@ int main(int argc, char** argv)
             }
             cumulativeTime = 0.;
         }*/
+        for(std::vector<Entity>::iterator e = entityList.begin() ; e != entityList.end() ; e++)
+        {
+            //e.animate(cumulativeTime);
+            e->move(dx, dy);
+        }
         //for(auto e : entityList)
         for(std::vector<Entity>::iterator e = entityList.begin() ; e != entityList.end() ; e++)
         {
