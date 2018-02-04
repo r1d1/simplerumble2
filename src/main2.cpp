@@ -16,6 +16,7 @@ SIMPLE RUMBLE !
 
 #include "Agent.h"
 #include "Entity.h"
+#include "Map.h"
 #include "Attack.h"
 #include "utils.h"
 #include "SRConfig.h"
@@ -36,7 +37,10 @@ int main(int argc, char** argv)
     App.setFramerateLimit(60);
 	sf::Texture cursorTexture;
 	sf::Texture npcTexture;
-     
+
+    Map testMap(64,32);
+    testMap.initRandMap();
+
 	if (!npcTexture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading npc image" << std::endl; return EXIT_FAILURE; }
     sf::Sprite cursorSprite;
 	if (!cursorTexture.loadFromFile("media/images/menuSelect2.png")){ std::cout << "Error when loading cursor image" << std::endl; return EXIT_FAILURE; }
@@ -46,8 +50,8 @@ int main(int argc, char** argv)
     for(int i = 0 ; i < 5 ; i++)
     {
         Entity e = Entity("entity"+std::to_string(i), &npcTexture);
-        float x = 50 + rand() % (WINDOW_WIDTH-50);
-        float y = 50 + rand() % (WINDOW_HEIGHT-50);
+        float x = 250 + rand() % (WINDOW_WIDTH-50);
+        float y = 150 + rand() % (WINDOW_HEIGHT-50);
         std::cout << x << ", " << y << std::endl;
         e.move(x, y);
         entityList.push_back(e);
@@ -92,6 +96,7 @@ int main(int argc, char** argv)
                 if (event.key.code == sf::Keyboard::Left){ dx = -5; }
                 if (event.key.code == sf::Keyboard::Right){ dx = 5; }
 				
+                if (event.key.code == sf::Keyboard::Space){ testMap.initGroundMap(); }
 				/*switch(gameState)
 				{
                     case 0: 
@@ -148,10 +153,11 @@ int main(int argc, char** argv)
         }
         sf::Color bgColor = sf::Color(0+redval, 0, 0);
 		App.clear(bgColor);
+        testMap.render(&App);
 		App.draw(cursorSprite);
         for(auto e : entityList)
         {
-            e.render(&App);
+            //e.render(&App);
         }
 		App.display();
     }
