@@ -15,3 +15,44 @@ Implement:
 - Pac-man like
 
 Game with lifelong learning AI Jean-Jacques that learns to play the game and that can be "forked" to generate Jean-Jacques 2, 3 ...
+
+STR game with sheeps: The battle for Meadow Earth
+
+Intro
+- Scene 1: Once upon a time, sheeps were living peacefully on Meadow Earth, eating grass, smoking Pipe-Weed and running in pastures.
+- Scene 2: But one day, one of them ate the Root of Discord, and became the Evil SheepLord.
+- Scene 3: He started gathering followers and invading peaceful meadows ...
+- Scene 4: ... killing many innocent lambs and ewes and capturing fellow sheeps to sacrifice to the Tree of Evil.
+- Scene 5: Hopefully, a group of fellow sheep leaders have started fighting against the Evil Lord.
+> Start Menu (1)
+- Scene 6: Really ? That's not enough background story for you to play a RTS game ?
+
+(1) Start Menu:
+# Play Battle
+# Play Story Mode (yet to come)
+# Options
+# More Background (-> Goes to Scene 6)
+# Exit
+
+Software States / Tree:
+# Animated Intro (only 1 time)
+# Main Screen
+## Battle
+## Story Mode (lots of substates)
+## Options
+## More background
+## Exit (properly close everything ; could also just break the main loop)
+
+- Good vs Evil sides (2 tech trees)
+
+- probably need a "playerstate/civilizationstate" to gather all variables together (resources values, production values, activated techs, ...)
+
+- Resources: wool (cutting out sheep wool), grass (slowly grows from meadows), gas (sheeps farting)
+- main building
+- units:
+-- base sheep can produce resources/build factories
+- unit factory
+- "Movie animation" : background layer, middle layer, front layer
+- General animation that support movie and normal animations ?
+
+Small adventure game with sheeps:
