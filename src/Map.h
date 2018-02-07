@@ -22,6 +22,7 @@ class Map
         void render(sf::RenderWindow * app);
         void initRandMap();
         void initGroundMap();
+        void initLayeredGroundMap();
         char getRandType();
 
         void addColumn();

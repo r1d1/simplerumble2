@@ -50,6 +50,41 @@ void Map::initGroundMap()
     }
 }
 
+void Map::initLayeredGroundMap()
+{
+    float period_air = (rand() % 100)/ 110.;
+    float period_grass = (rand() % 100)/ 110.;
+    float period_dirt = (rand() % 100)/ 110.;
+    for(int i = 0 ; i < width ; i++)
+    {
+        for(int j = 0 ; j < height ; j++)
+        {
+            int threshold_air = (0.45 + 0.3 * std::sin(period_air*i)) * height; // (rand() % int(0.0 * height)) + 
+            int threshold_grass = (rand() % int(0.2 * height)) + (0.6 + 0.2 * std::sin(period_grass*i)) * height;
+            int threshold_dirt = (rand() % int(0.2 * height)) + (0.8 + 0.2 * std::sin(period_dirt*i)) * height;
+            //std::cout << "th: " << threshold << ", " << std::flush;
+            if(j < threshold_air ){ occupancy[i][j] = 'a'; }
+            else
+            {
+                if(j < threshold_grass ){ occupancy[i][j] = 'g'; }
+                else
+                {
+                    if(j < threshold_dirt )
+                    {
+                        if( (rand() % 1000) / 1000. < 0.98 ){ occupancy[i][j] = 'd'; }
+                        else{ occupancy[i][j] = 'i'; }
+                    }
+                    else
+                    {
+                        if( (rand() % 1000) / 1000. < 0.95 ){ occupancy[i][j] = 'r'; }
+                        else{ occupancy[i][j] = 'i'; }
+                    }
+                }
+            }
+        }
+    }
+}
+
 char Map::getRandType()
 {
     char chartype = 'a';
@@ -71,6 +106,10 @@ char Map::getRandType()
         case 3:
             // iron
             chartype = 'i';
+        break;
+        case 4:
+            // void
+            chartype = 'v';
         break;
         default:
             // air
@@ -150,7 +189,7 @@ void Map::render(sf::RenderWindow * app)
         c+=1;
     }*/
     int c = 0;
-    int tileWidth=16;
+    int tileWidth=8;
     //for (std::vector<char[32]>::iterator it = occupancy.begin() ; it != occupancy.end() ; it++)
     //{
     for (int i = 0 ; i < width ; i++)
@@ -172,7 +211,8 @@ void Map::render(sf::RenderWindow * app)
                                (occupancy[i][j] == 'i' ? sf::Color(255,255,255) :
                                (occupancy[i][j] == 'g' ? sf::Color(128, 255, 128) :
                                (occupancy[i][j] == 'd' ? sf::Color(128,96,64) :
-                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : sf::Color(0,0,0))))));
+                               (occupancy[i][j] == 'v' ? sf::Color(128,96,128) :
+                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : sf::Color(0,0,0)))))));
             // define the color of the triangle's points
             quads[0].color = qColor;
             quads[1].color = qColor;

@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 	sf::Texture cursorTexture;
 	sf::Texture npcTexture;
 
-    Map testMap(64,32);
+    Map testMap(128,64);
     testMap.initRandMap();
 
 	if (!npcTexture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading npc image" << std::endl; return EXIT_FAILURE; }
@@ -97,6 +97,7 @@ int main(int argc, char** argv)
                 if (event.key.code == sf::Keyboard::Right){ dx = 5; }
 				
                 if (event.key.code == sf::Keyboard::Space){ testMap.initGroundMap(); }
+                if (event.key.code == sf::Keyboard::L){ testMap.initLayeredGroundMap(); }
 				/*switch(gameState)
 				{
                     case 0: 
