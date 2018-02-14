@@ -52,6 +52,7 @@ Software States / Tree:
 - Building: Park (allow for grass production), BellyMassaging (gas prod), ExtraCutter3000 (wool prod), Nursery (sheep prod)
 - unit:
 -- base sheep can produce resources/build factories
+-- Adds mecha at some point (either in base game or extension)
 - unit factory
 - "Movie animation" : background layer, middle layer, front layer
 - General animation that support movie and normal animations ?
