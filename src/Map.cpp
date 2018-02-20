@@ -66,7 +66,7 @@ void Map::initLayeredGroundMap()
             if(j < threshold_air ){ occupancy[i][j] = 'a'; }
             else
             {
-                if(j < threshold_grass ){ occupancy[i][j] = 'g'; }
+                if(j < threshold_grass ){ occupancy[i][j] = ( (rand() % 100 < 50 ) ? 'g': 'f'); }
                 else
                 {
                     if(j < threshold_dirt )
@@ -210,9 +210,10 @@ void Map::render(sf::RenderWindow * app)
             sf::Color qColor = (occupancy[i][j] == 'a' ? sf::Color(0,128, 255) :
                                (occupancy[i][j] == 'i' ? sf::Color(255,255,255) :
                                (occupancy[i][j] == 'g' ? sf::Color(128, 255, 128) :
+                               (occupancy[i][j] == 'f' ? sf::Color(64,128,0) :
                                (occupancy[i][j] == 'd' ? sf::Color(128,96,64) :
                                (occupancy[i][j] == 'v' ? sf::Color(128,96,128) :
-                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : sf::Color(0,0,0)))))));
+                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : sf::Color(0,0,0))))))));
             // define the color of the triangle's points
             quads[0].color = qColor;
             quads[1].color = qColor;
