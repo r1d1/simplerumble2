@@ -69,3 +69,7 @@ sheeps have following stats:
 # Genetic type system for sheep production ?
 
 Small adventure game with sheeps:
+
+References on GameStateLoop:
+- http://funwithbits.net/blog/handling-game-states/
+- https://gamedev.stackexchange.com/questions/28931/most-effective-way-to-manage-a-gamestate-system-that-is-easy-to-use
