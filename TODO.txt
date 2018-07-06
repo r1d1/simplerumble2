@@ -4,6 +4,7 @@ SimpleRumble:
 
 Implement:
 - Inventory
+- Tech tree (STR)
 - Combos
 - Character generation (what was my idea? STR unit like popping ? RPG definition -easy, ain't it?)
 - Collision system / platformer
