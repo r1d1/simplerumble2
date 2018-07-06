@@ -13,6 +13,7 @@ Implement:
 
 - Double dragon-like game
 - Pac-man like
+- Clone Age of Empires
 
 Game with lifelong learning AI Jean-Jacques that learns to play the game and that can be "forked" to generate Jean-Jacques 2, 3 ...
 
