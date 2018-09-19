@@ -75,3 +75,6 @@ Small adventure game with sheeps:
 References on GameStateLoop:
 - http://funwithbits.net/blog/handling-game-states/
 - https://gamedev.stackexchange.com/questions/28931/most-effective-way-to-manage-a-gamestate-system-that-is-easy-to-use
+
+"Vous imaginez si, en pleine bataille, la couleur des uniformes changeait d’un coup ? Pire : si tous les uniformes ne changeaient pas en même temps ? Est-ce qu’on se massacrerait de plus belle dans le plus grand désordre, est-ce qu’on se dépêcherait de reformer des bataillons plus vite qu’on est capable de s’habituer à ses nouveaux frères d’armes… ou est-ce qu’on arriverait à relativiser nos rôles sociaux pour (par exemple) tâcher de se rappeler de nos véritables opinions ?"
+https://alias.erdorin.org/article-invite-trolls-elfes-contestation-moderation/
