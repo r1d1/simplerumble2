@@ -1,6 +1,15 @@
 SimpleRumble:
-- Fight animation
+- Fight animation -- kinda OK
 - More attacks
+
+Animation class:
+- have parameters to deal with complex sprite sheets:
+  - nb rows (i.e. nb of diff anim types)
+  - nb frames per row (list)
+  - speed per row
+  - size of visible window
+
+develop small standalone code for that
 
 Implement:
 - Inventory
@@ -9,6 +18,9 @@ Implement:
 - Character generation (what was my idea? STR unit like popping ? RPG definition -easy, ain't it?)
 - Collision system / platformer
 - Tree quest system
+- Individual Character generation without explicit gender selection (but "bilinear" assets: ranging from M to F and Fit to Fat)
+- STR ou le but/"le moyen de gagner" n'est pas d'eliminer les autres "tribus"/ mais d'arriver a une union / victoire basee sur "bonheur de la pop"/"niveau social"
+--- avoir une jauge de "malefice" qui change le style de l'interface en fonction des meurtres accomplis
 
 6 Chapters / Episodes / Game Phase 
 
