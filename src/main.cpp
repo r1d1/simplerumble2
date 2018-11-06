@@ -29,6 +29,12 @@ SIMPLE RUMBLE !
 int main(int argc, char** argv)
 {
 	int gameState = 0;
+	int sprite1_x = 64;
+    int sprite1_y = 64;
+    int sprite1_w = 64;
+    int sprite1_h = 64;
+    int sprite1_ox = 0;
+    int sprite1_oy = 1;
 	
 	srand(time(NULL));
 	// ================ Initialising ! ================
@@ -43,21 +49,28 @@ int main(int argc, char** argv)
 	sf::Sprite character1Sprite;
 	sf::Texture character2Texture;
 	sf::Sprite character2Sprite;
-	if (!character1Texture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+    //if (!character1Texture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	if (!character1Texture.loadFromFile("media/images/spriteSheet.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	else{ character1Sprite.setTexture(character1Texture); }
 	if (!character2Texture.loadFromFile("media/images/npc2-full.png")){ std::cout << "Error when loading player image" << std::endl; return EXIT_FAILURE; }
 	else{ character2Sprite.setTexture(character2Texture); }
 
 	std::cout << "Texture sprite : " << (character1Sprite.getTexture())->getSize().x << " " <<  (character1Sprite.getTexture())->getSize().y << std::endl;
 
-	character1Sprite.setTextureRect(sf::IntRect(32, 96, 32, 48));
+	character1Sprite.setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
 	std::cout << "Texture sprite : " << (character1Sprite.getTexture())->getSize().x << " " <<  (character1Sprite.getTexture())->getSize().y << std::endl;
-	character2Sprite.setTextureRect(sf::IntRect(32, 48, 32, 48));
+	//character2Sprite.setTextureRect(sf::IntRect(32, 48, 32, 48));
+	sprite1_x = 128;
+    sprite1_y = 64;
+    sprite1_w = 64;
+    sprite1_h = 64;
+	character1Sprite.setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
 	character1Sprite.setScale(2.0f, 2.0f);
 	character2Sprite.setScale(2.0f, 2.0f);
 	character1Sprite.setPosition(WINDOW_WIDTH * 0.8 / 3, WINDOW_HEIGHT / 4);
 	character2Sprite.setPosition(WINDOW_WIDTH * 1.8 / 3, WINDOW_HEIGHT / 4);
 	int animFrame = 0;
+	int animFrame_p1 = 0;
 	
 	bool posOne = true;
 
@@ -237,6 +250,8 @@ int main(int argc, char** argv)
 							gameState = 2;
 							opponentSprite->setPosition(WINDOW_WIDTH * 0.8 / 3, WINDOW_HEIGHT / 4);
 							playerSprite->setPosition(WINDOW_WIDTH * 1.8 / 3, WINDOW_HEIGHT / 4);
+                            sprite1_x = 0;
+                            sprite1_y = 31*64;
 						}
 					break;
 					case 2 :
@@ -250,6 +265,10 @@ int main(int argc, char** argv)
 							if (event.key.code == sf::Keyboard::Up){ menuChoice = ( ((menuChoice-1)>0)? menuChoice-1 : 0); }
 							if (event.key.code == sf::Keyboard::Down){ menuChoice = ( ((menuChoice+1) < maxMenuChoices-1)? menuChoice+1 : maxMenuChoices-1); }
 							if (event.key.code == sf::Keyboard::A){ player->changeAttack(&attackOne); opponent->changeAttack(&attackTwo); std::cout << "You got the Axe !" << std::endl; }
+							if (event.key.code == sf::Keyboard::Z){ sprite1_y = 21*64; }
+							if (event.key.code == sf::Keyboard::Q){ sprite1_y = 25*64; }
+							if (event.key.code == sf::Keyboard::S){ sprite1_y = 27*64; }
+							if (event.key.code == sf::Keyboard::D){ sprite1_y = 31*64; }
 						}
 					break;
 					case 3 :
@@ -504,10 +523,14 @@ int main(int argc, char** argv)
 				if(cumulativeTime > 0.25)
 				{
 					animFrame = (animFrame + 1) % 4;
+					animFrame_p1 = (animFrame_p1 + 1) % 7;
 					cumulativeTime = 0.0;
 				}
 				else{ cumulativeTime += elapsedTime.asSeconds(); }
-				character1Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 48));
+                sprite1_x = animFrame_p1 * sprite1_w;
+                sprite1_y = 128;
+                character1Sprite.setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
+				//character1Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 48));
 				character2Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 48));
 				App.draw(char1Name);
 				App.draw(char1MaxLife);
@@ -519,12 +542,18 @@ int main(int argc, char** argv)
 				App.draw(character2Sprite);
 			break;
 			case 2 :
-				
+				sprite1_w = 192;
+                sprite1_h = 192;
+                //sprite1_x = animFrame_p1 * sprite1_w;
 				playerSprite->setTextureRect(sf::IntRect(animFrame*32, 48, 32, 48));
-				opponentSprite->setTextureRect(sf::IntRect(animFrame*32, 96, 32, 48));
+				//playerSprite->setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
+                //setTextureRect(sf::IntRect(animFrame*32, 48, 32, 48));
+                //opponentSprite->setPosition(WINDOW_WIDTH * 0.8 / 3 - sprite1_w / 2, WINDOW_HEIGHT / 4 - sprite1_h / 2);
+				opponentSprite->setTextureRect(sf::IntRect(animFrame_p1 * sprite1_x, sprite1_y, sprite1_w, sprite1_h));
 				if(cumulativeTime > 0.25)
 				{
 					animFrame = (animFrame + 1) % 4;
+					animFrame_p1 = (animFrame_p1 + 1) % 6;
 					cumulativeTime = 0.0;
 				}
 				else{ cumulativeTime += elapsedTime.asSeconds(); }
