@@ -23,8 +23,8 @@ SIMPLE RUMBLE !
 //#define APP_STATUS "b"
 
 #define SPEED 1000
-#define WINDOW_WIDTH 600
-#define WINDOW_HEIGHT 400
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 int main(int argc, char** argv)
 {
@@ -33,8 +33,10 @@ int main(int argc, char** argv)
 	srand(time(NULL));
 	// ================ Initialising ! ================
 	// Create main window
+    sf::VideoMode currentScreenRes = sf::VideoMode::getDesktopMode();
+    std::cout << "Screen: " << currentScreenRes.width << ", " << currentScreenRes.height << ", " << currentScreenRes.bitsPerPixel << std::endl;
 	// Black screen
-	sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!");
+	sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!"); //, sf::Style::Fullscreen);
 	
 	sf::Sprite * opponentSprite;
 	sf::Sprite * playerSprite;
@@ -43,16 +45,17 @@ int main(int argc, char** argv)
 	sf::Sprite character1Sprite;
 	sf::Texture character2Texture;
 	sf::Sprite character2Sprite;
-	if (!character1Texture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	if (!character1Texture.loadFromFile("/home/erwan/Pictures/sprites/blob_base.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	else{ character1Sprite.setTexture(character1Texture); }
-	if (!character2Texture.loadFromFile("media/images/npc2-full.png")){ std::cout << "Error when loading player image" << std::endl; return EXIT_FAILURE; }
+	if (!character2Texture.loadFromFile("/home/erwan/Pictures/sprites/blob_base2.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	//if (!character2Texture.loadFromFile("media/images/npc2-full.png")){ std::cout << "Error when loading player image" << std::endl; return EXIT_FAILURE; }
 	else{ character2Sprite.setTexture(character2Texture); }
 
 	std::cout << "Texture sprite : " << (character1Sprite.getTexture())->getSize().x << " " <<  (character1Sprite.getTexture())->getSize().y << std::endl;
 
-	character1Sprite.setTextureRect(sf::IntRect(32, 96, 32, 48));
+	character1Sprite.setTextureRect(sf::IntRect(32, 2*32, 32, 32));
 	std::cout << "Texture sprite : " << (character1Sprite.getTexture())->getSize().x << " " <<  (character1Sprite.getTexture())->getSize().y << std::endl;
-	character2Sprite.setTextureRect(sf::IntRect(32, 48, 32, 48));
+	character2Sprite.setTextureRect(sf::IntRect(32, 32, 32, 32));
 	character1Sprite.setScale(2.0f, 2.0f);
 	character2Sprite.setScale(2.0f, 2.0f);
 	character1Sprite.setPosition(WINDOW_WIDTH * 0.8 / 3, WINDOW_HEIGHT / 4);
@@ -509,8 +512,8 @@ int main(int argc, char** argv)
 					cumulativeTime = 0.0;
 				}
 				else{ cumulativeTime += elapsedTime.asSeconds(); }
-				character1Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 48));
-				character2Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 48));
+				character1Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 32));
+				character2Sprite.setTextureRect(sf::IntRect(animFrame*32, 0, 32, 32));
 				App.draw(char1Name);
 				App.draw(char1MaxLife);
 				App.draw(char1Shield);
@@ -522,8 +525,8 @@ int main(int argc, char** argv)
 			break;
 			case 2 :
 				
-				playerSprite->setTextureRect(sf::IntRect(animFrame*32, 48, 32, 48));
-				opponentSprite->setTextureRect(sf::IntRect(animFrame*32, 96, 32, 48));
+				playerSprite->setTextureRect(sf::IntRect(animFrame*32, 32, 32, 32));
+				opponentSprite->setTextureRect(sf::IntRect(animFrame*32, 2*32, 32, 32));
 				if(cumulativeTime > 0.25)
 				{
 					animFrame = (animFrame + 1) % 4;
