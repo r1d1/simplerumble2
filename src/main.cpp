@@ -265,6 +265,7 @@ int main(int argc, char** argv)
 							if (event.key.code == sf::Keyboard::Up){ menuChoice = ( ((menuChoice-1)>0)? menuChoice-1 : 0); }
 							if (event.key.code == sf::Keyboard::Down){ menuChoice = ( ((menuChoice+1) < maxMenuChoices-1)? menuChoice+1 : maxMenuChoices-1); }
 							if (event.key.code == sf::Keyboard::A){ player->changeAttack(&attackOne); opponent->changeAttack(&attackTwo); std::cout << "You got the Axe !" << std::endl; }
+							if (event.key.code == sf::Keyboard::E){ player->attack(*opponent); }
 							if (event.key.code == sf::Keyboard::Z){ sprite1_y = 21*64; }
 							if (event.key.code == sf::Keyboard::Q){ sprite1_y = 25*64; }
 							if (event.key.code == sf::Keyboard::S){ sprite1_y = 27*64; }
