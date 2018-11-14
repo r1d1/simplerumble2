@@ -1,10 +1,12 @@
 #include "Map.h"
 #include <iostream>
 
-Map::Map(int w=32, int h=16)
+Map::Map(int w=32, int h=16, int tw=10, int th=10)
 {
     width = w;
     height = h;
+    tileWidth = tw;
+    tileHeight = th;
     occupancy.resize(width);
     //visibleMap.setPrimitiveType(sf::Quads);
     for(int i = 0 ; i < width ; i++)
@@ -91,6 +93,10 @@ char Map::getRandType()
     int val = rand() % 5;
     switch(val)
     {
+        case -1:
+            // joker
+            chartype = 'x';
+        break;
         case 0:
             // dirt
             chartype = 'd';
@@ -118,6 +124,9 @@ char Map::getRandType()
     return chartype;
 }
 
+char Map::getTileType(int x, int y){ return (occupancy.at(x)).at(y); } 
+void Map::setTileType(int x, int y, char t){ (occupancy.at(x)).at(y) = t; }
+
 void Map::addColumn()
 {
     char newCol[32];
@@ -126,6 +135,10 @@ void Map::addColumn()
         int val = rand() % 4;
         switch(val)
         {
+            case -1:
+                // joker
+                newCol[i] = 'x';
+            break;
             case 0:
                 // dirt
                 newCol[i] = 'd';
@@ -189,7 +202,10 @@ void Map::render(sf::RenderWindow * app)
         c+=1;
     }*/
     int c = 0;
-    int tileWidth=8;
+    //std::cout << "Tiles:" << tileWidth << "," << tileHeight << std::endl;
+    //int tileWidth=8;
+    //int tileWidth = app->getSize().x / width;
+    //int tileHeight = app->getSize().y / height;
     //for (std::vector<char[32]>::iterator it = occupancy.begin() ; it != occupancy.end() ; it++)
     //{
     for (int i = 0 ; i < width ; i++)
@@ -201,10 +217,10 @@ void Map::render(sf::RenderWindow * app)
             //std::cout << occupancy[i][j] << ", " << std::flush;
             
             // define the position of the triangle's points
-            quads[0].position = sf::Vector2f(0 + i * tileWidth, 0 + j * tileWidth);
-            quads[1].position = sf::Vector2f(tileWidth + i * tileWidth, 0 + j * tileWidth);
-            quads[2].position = sf::Vector2f(tileWidth + i * tileWidth, tileWidth + j * tileWidth);
-            quads[3].position = sf::Vector2f(0 + i * tileWidth, tileWidth + j * tileWidth);
+            quads[0].position = sf::Vector2f(0 + i * tileWidth, 0 + j * tileHeight);
+            quads[1].position = sf::Vector2f(tileWidth + i * tileWidth, 0 + j * tileHeight);
+            quads[2].position = sf::Vector2f(tileWidth + i * tileWidth, tileHeight + j * tileHeight);
+            quads[3].position = sf::Vector2f(0 + i * tileWidth, tileHeight + j * tileHeight);
 
             //sf::Color qColor = sf::Color::Red;
             sf::Color qColor = (occupancy[i][j] == 'a' ? sf::Color(0,128, 255) :
@@ -213,7 +229,8 @@ void Map::render(sf::RenderWindow * app)
                                (occupancy[i][j] == 'f' ? sf::Color(64,128,0) :
                                (occupancy[i][j] == 'd' ? sf::Color(128,96,64) :
                                (occupancy[i][j] == 'v' ? sf::Color(128,96,128) :
-                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : sf::Color(0,0,0))))))));
+                               (occupancy[i][j] == 'r' ? sf::Color(64,64,64) : 
+                               (occupancy[i][j] == 'x' ? sf::Color(255,0,0) : sf::Color(0,0,0)))))))));
             // define the color of the triangle's points
             quads[0].color = qColor;
             quads[1].color = qColor;
