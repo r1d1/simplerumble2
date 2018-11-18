@@ -5,6 +5,7 @@ Entity::Entity(std::string entity_name, sf::Texture * ptexture = NULL)
 {
     pos_x = 0.;
     pos_y = 0.;
+    facing = 'w';
     graphicsUpdated=false;
     dataUpdated=false;
     banaana = 0.;
@@ -34,6 +35,7 @@ void Entity::move(float dx=0., float dy=0.)
 
 void Entity::animate(float elapsedTime)
 {
+    // Animator.play();
     if(cumulativeTime > 0.25)
     {
         animFrame = (animFrame + 1) % 4;

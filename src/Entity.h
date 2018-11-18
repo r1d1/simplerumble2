@@ -18,6 +18,7 @@ class Entity
         std::string name;
         float pos_x;
         float pos_y;
+        char facing; // n, e, s, w, m
 
         int count;
 
