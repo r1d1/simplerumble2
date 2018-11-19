@@ -28,7 +28,7 @@ class Animator: public sf::Sprite
 		void play(bool s);
 		//void pause();
         void reset();
-        void setAnimType(int t){ currentRow = t % description.size(); }
+        void setAnimType(int t);
         int getAnimType(){ return currentRow; }
 
         void addDescription(AnimRow ar){ description.push_back(ar); }

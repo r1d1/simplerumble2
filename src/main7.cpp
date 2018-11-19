@@ -42,7 +42,8 @@ int main(int argc, char** argv)
     sf::Sprite animatedSprite;
 	animatedSprite.setScale(2.0f, 2.0f);
 	animatedSprite.setPosition(WINDOW_WIDTH / 2 - 16, WINDOW_HEIGHT / 2 - 16);
-    if (!animTexture.loadFromFile("media/images/blob_stand_move.png"))
+    //if (!animTexture.loadFromFile("media/images/blob_stand_move.png"))
+    if (!animTexture.loadFromFile("media/images/npc1-full.png"))
     {
         std::cout << "Error when loading opponent image" << std::endl;
         return EXIT_FAILURE;
@@ -51,14 +52,14 @@ int main(int argc, char** argv)
     
 	animatedSprite.setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
     Animator anim1;
-    anim1.addDescription(AnimRow(32,32, 4, 0.25));
-    anim1.addDescription(AnimRow(32,32, 4, 0.25));
-    anim1.addDescription(AnimRow(32,32, 4, 0.25));
-    anim1.addDescription(AnimRow(32,32, 4, 0.25));
-    anim1.addDescription(AnimRow(32,32, 4, 0.1));
-    anim1.addDescription(AnimRow(32,32, 4, 0.1));
-    anim1.addDescription(AnimRow(32,32, 4, 0.1));
-    anim1.addDescription(AnimRow(32,32, 4, 0.1));
+    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
+    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
+    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
+    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
+    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
 	int animFrame = 0;
 
 	int characterChoice = 0;
@@ -244,12 +245,15 @@ int main(int argc, char** argv)
                 //if (event.key.code == sf::Keyboard::Right){ characterChoice = ( ((characterChoice+1) < maxCharacterChoices-1)? characterChoice+1 : maxCharacterChoices-1); }
                 
                 // Switching on options :
-                if (event.key.code == sf::Keyboard::Z){ sprite1_y = 0*sprite1_h; }
-                if (event.key.code == sf::Keyboard::Q){ sprite1_y = 3*sprite1_h; }
-                if (event.key.code == sf::Keyboard::S){ sprite1_y = 2*sprite1_h; }
-                if (event.key.code == sf::Keyboard::D){ sprite1_y = 1*sprite1_h; }
+                //if (event.key.code == sf::Keyboard::Z){ sprite1_y = 0*sprite1_h; }
+                //if (event.key.code == sf::Keyboard::Q){ sprite1_y = 3*sprite1_h; }
+                //if (event.key.code == sf::Keyboard::S){ sprite1_y = 2*sprite1_h; }
+                //if (event.key.code == sf::Keyboard::D){ sprite1_y = 1*sprite1_h; }
                 if (event.key.code == sf::Keyboard::Space){ anim1.play(true); }
                 if (event.key.code == sf::Keyboard::B){ anim1.play(false); }
+                if (event.key.code == sf::Keyboard::Up){ anim1.setAnimType(anim1.getAnimType()+1); }
+                if (event.key.code == sf::Keyboard::Down){ anim1.setAnimType(anim1.getAnimType()-1); }
+                std::cout << "Anim type: " << anim1.getAnimType() << std::endl;
 			}
 		
         }

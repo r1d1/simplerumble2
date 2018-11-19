@@ -12,7 +12,7 @@ Animator::Animator()
 void Animator::animate(sf::Sprite & s)
 {
     //std::cout << "a" << std::flush;
-    std::cout << "cumtime: " << cumulativeTime << ", " << elapsedTime.asMicroseconds() << ", " << currentFrame << std::endl;
+    //std::cout << "cumtime: " << cumulativeTime << ", " << elapsedTime.asMicroseconds() << ", " << currentFrame << std::endl;
     auto row = description.at(currentRow);
     if(playing)
     {
@@ -39,6 +39,19 @@ void Animator::animate(sf::Sprite & s)
     else
     {
         //std::cout << " ----- P" << std::endl;
+    }
+}
+
+void Animator::setAnimType(int t)
+{
+    if( t < 0 )
+    {
+        currentRow = description.size() + t;
+    }
+    else
+    {
+        if( t >= description.size() ){ currentRow = t - description.size(); }
+        else{ currentRow = t; }
     }
 }
 
