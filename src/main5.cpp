@@ -45,9 +45,11 @@ int main(int argc, char** argv)
 	sf::Sprite character1Sprite;
 	sf::Texture character2Texture;
 	sf::Sprite character2Sprite;
-	if (!character1Texture.loadFromFile("media/images/blob_stand_move.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	//if (!character1Texture.loadFromFile("media/images/blob_stand_move.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	if (!character1Texture.loadFromFile("/home/erwan/Images/gifs/spritesheet_test.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	else{ character1Sprite.setTexture(character1Texture); }
-	if (!character2Texture.loadFromFile("/home/erwan/Pictures/sprites/blob_base2.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	if (!character2Texture.loadFromFile("/home/erwan/Images/gifs/spritesheet_test.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	//if (!character2Texture.loadFromFile("/home/erwan/Pictures/sprites/blob_base2.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	//if (!character2Texture.loadFromFile("media/images/npc2-full.png")){ std::cout << "Error when loading player image" << std::endl; return EXIT_FAILURE; }
 	else{ character2Sprite.setTexture(character2Texture); }
 
