@@ -37,13 +37,14 @@ int main(int argc, char** argv)
 	// Create main window
 	// Black screen
 	sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!");
+    App.setFramerateLimit(60);
 
 	sf::Texture animTexture;
     sf::Sprite animatedSprite;
 	animatedSprite.setScale(2.0f, 2.0f);
 	animatedSprite.setPosition(WINDOW_WIDTH / 2 - 16, WINDOW_HEIGHT / 2 - 16);
-    //if (!animTexture.loadFromFile("media/images/blob_stand_move.png"))
-    if (!animTexture.loadFromFile("media/images/npc1-full.png"))
+    if (!animTexture.loadFromFile("media/images/blob_stand_move_rev.png"))
+    //if (!animTexture.loadFromFile("media/images/npc1-full.png"))
     {
         std::cout << "Error when loading opponent image" << std::endl;
         return EXIT_FAILURE;
@@ -52,14 +53,14 @@ int main(int argc, char** argv)
     
 	animatedSprite.setTextureRect(sf::IntRect(sprite1_x, sprite1_y, sprite1_w, sprite1_h));
     Animator anim1;
-    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
-    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
-    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
-    anim1.addDescription(AnimRow(32, 48, 4, 0.25));
-    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
-    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
-    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
-    //anim1.addDescription(AnimRow(32, 48, 4, 0.1));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
+    anim1.addDescription(AnimRow(32, 32, 4, 0.25));
 	int animFrame = 0;
 
 	int characterChoice = 0;
