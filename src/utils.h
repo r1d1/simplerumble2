@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdlib>
+#include <cmath>
 
 std::string randomNameGenerator(int length);
 

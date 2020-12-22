@@ -49,8 +49,8 @@ int main(int argc, char** argv)
 	sf::Sprite character1Sprite;
 	sf::Texture character2Texture;
 	sf::Sprite character2Sprite;
-    //if (!character1Texture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
-	if (!character1Texture.loadFromFile("media/images/spriteSheet.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+    if (!character1Texture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
+	//if (!character1Texture.loadFromFile("media/images/spriteSheet.png")){ std::cout << "Error when loading opponent image" << std::endl; return EXIT_FAILURE; }
 	else{ character1Sprite.setTexture(character1Texture); }
 	if (!character2Texture.loadFromFile("media/images/npc2-full.png")){ std::cout << "Error when loading player image" << std::endl; return EXIT_FAILURE; }
 	else{ character2Sprite.setTexture(character2Texture); }
