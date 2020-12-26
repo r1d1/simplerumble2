@@ -10,6 +10,7 @@ SIMPLE RUMBLE !
 #include <SFML/System.hpp>
 
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <sstream>

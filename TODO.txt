@@ -96,3 +96,5 @@ Jeu ou chaque mort/repop du PJ augmente ses caracts en mode rage
 Jeu où chaque dégât additionnel lorsqu'on acheve un ennemi charge une jauge/est infligé dans le prochain combat au nouvel ennemi/estréparti entre les protagonistes (d'où l'utilité de choisir précisément ses attaques)
 
 Game Jam where the game genre is a combination of two randomly selected genres (https://en.wikipedia.org/wiki/List_of_video_game_genres)
+# RPG / Action-RPG game:
+Tier 1-2-3 for stuff, level tied to "runes" rather than object to allow multiple looks
