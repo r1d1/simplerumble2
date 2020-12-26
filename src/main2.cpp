@@ -38,7 +38,8 @@ int main(int argc, char** argv)
 	sf::Texture cursorTexture;
 	sf::Texture npcTexture;
 
-    Map testMap(128,64, 8,8);
+    //Map testMap(128,64, 8,8);
+    Map testMap(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 4, 4);
     testMap.initRandMap();
 
 	if (!npcTexture.loadFromFile("media/images/npc1-full.png")){ std::cout << "Error when loading npc image" << std::endl; return EXIT_FAILURE; }
