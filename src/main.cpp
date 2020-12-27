@@ -219,7 +219,7 @@ int main(int argc, char** argv)
 		sf::Time elapsedTime = clock.getElapsedTime();
 		clock.restart();
 		bool validatedChoice = false;
-		int enemyChoice;
+		int enemyChoice = 1;
 
 		while (App.pollEvent(event))
 		{
@@ -250,8 +250,8 @@ int main(int argc, char** argv)
 						{
 							gameState = 2;
 							std::cout << "Chosen: " << characterChoice << std::endl;
-							//opponentSprite->setPosition(WINDOW_WIDTH * 0.8, WINDOW_HEIGHT / 4);
-							//playerSprite->setPosition(WINDOW_WIDTH * 0.5, WINDOW_HEIGHT / 4);
+							opponentSprite->setPosition(WINDOW_WIDTH * 0.8 - 16, WINDOW_HEIGHT / 3);
+							playerSprite->setPosition(WINDOW_WIDTH * 0.2 - 16, WINDOW_HEIGHT / 3);
 						}
 					break;
 					case 2 :
@@ -300,7 +300,7 @@ int main(int argc, char** argv)
 						App.close();
 					break;
 				}
-				std::cout << "Menu choice : " << menuChoice << std::endl;
+				std::cout << "Menu choice : " << menuChoice << ", opponent choice : " << enemyChoice << std::endl;
 			}
 			
 			switch(gameState)
@@ -374,9 +374,9 @@ int main(int argc, char** argv)
 						opponent->takeDamage(2);
 					break;
 				}
-				std::cout << "Player state : " << std::endl;
+				std::cout << "Player choice :" << menuChoice << " state : " << std::endl;
 				player->displayState();
-				std::cout << "Opponent state : " << std::endl;
+				std::cout << "Opponent choice: " << enemyChoice << " state : " << std::endl;
 				opponent->displayState();
 			}
 	      	}
