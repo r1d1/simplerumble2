@@ -41,6 +41,7 @@ int main(int argc, char** argv)
 	// Create main window
 	// Black screen
 	sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!");
+	App.setFramerateLimit(60);
 	
 	sf::Sprite * opponentSprite;
 	sf::Sprite * playerSprite;

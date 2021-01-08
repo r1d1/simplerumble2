@@ -26,7 +26,7 @@ SIMPLE RUMBLE !
 
 int main(int argc, char** argv)
 {
-    int gameState = 2   ;
+    int gameState = 2;
     int sprite1_x = 0;
     int sprite1_y = 96;
     int sprite1_w = 32;
@@ -39,7 +39,8 @@ int main(int argc, char** argv)
     // Create main window
     // Black screen
     sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SIMPLE RUMBLE !!!");
-    
+    App.setFramerateLimit(60);
+
     sf::Sprite * opponentSprite;
     sf::Sprite * playerSprite;
     
@@ -210,6 +211,7 @@ int main(int argc, char** argv)
     int player_pose_x = WINDOW_WIDTH * 0.3;
     int player_pose_y = WINDOW_HEIGHT * 0.6;
     sf::Vector2f player_speed(0,0);
+    sf::Vector2f player_accel(ACCEL,ACCEL);
 
     // ----------------------------------------
     // Start game loop
@@ -229,7 +231,6 @@ int main(int argc, char** argv)
         clock.restart();
         bool validatedChoice = false;
         int enemyChoice = 1;
-
 
         player_speed = sf::Vector2f(0,0);
 
@@ -285,10 +286,11 @@ int main(int argc, char** argv)
                                 std::cout << "Player-Opponent distance: " << sqrt( (p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y) ) << std::endl;
                                 player->attack(*opponent);
                             }
-                            if (event.key.code == sf::Keyboard::Z){ /*Jump*/ player_speed.y -= ACCEL; }
-                            if (event.key.code == sf::Keyboard::Q){ /*ToLeft*/ player_speed.x -= ACCEL; }
-                            if (event.key.code == sf::Keyboard::D){ /*ToRight*/ player_speed.x += ACCEL; }
-                            if (event.key.code == sf::Keyboard::S){ /*Crouch*/ player_speed.y += ACCEL; }
+                            if (event.key.code == sf::Keyboard::Z){ /*Jump*/ player_speed.y -= player_accel.y; }
+                            if (event.key.code == sf::Keyboard::Q){ /*ToLeft*/ player_speed.x -= player_accel.x; }
+                            if (event.key.code == sf::Keyboard::D){ /*ToRight*/ player_speed.x += player_accel.x; }
+                            if (event.key.code == sf::Keyboard::S){ /*Crouch*/ player_speed.y += player_accel.y; }
+                            if (event.key.code == sf::Keyboard::Space){ player_speed = sf::Vector2f(0,0); }
                         }
                     break;
                     case 3 :
@@ -577,6 +579,7 @@ int main(int argc, char** argv)
                 // animFrame
                 //playerSprite->setPosition(player_pose_x, player_pose_y)
                 playerSprite->move(player_speed.x, player_speed.y);
+                std::cout << player_speed.x << ", " << player_speed.y << std::endl;
                 playerSprite->setTextureRect(sf::IntRect(animFrame * 32, 96, 32, 48));
                 opponentSprite->setPosition(WINDOW_WIDTH * 0.8 / 3 - sprite1_w / 2, WINDOW_HEIGHT / 4 - sprite1_h / 2);
                 opponentSprite->setTextureRect(sf::IntRect(animFrame_p1 * sprite1_w, 48, sprite1_w, sprite1_h));
